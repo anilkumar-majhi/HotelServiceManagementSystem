@@ -1,5 +1,6 @@
 package com.arms.org.Entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 
@@ -48,11 +49,18 @@ public class Address {
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
 	}
+	@Column
 	private String country;
+	@Column
     private String state;
+	@Column
     private String city;
+	@Column
     private String district;
+	@Column
     private String block;
+	@Column
     private String gp;
+	@Column
     private String pincode;
 }

@@ -57,6 +57,7 @@ public class UserServiceImplemetation implements UserService {
          existingUser.setGender(userDto.getGender());
          existingUser.setMobileNo(userDto.getMobileNo());
          existingUser.setPassword(userDto.getPassword());
+      
         
          existingUser.setAddress(mapper.toAddressEntity(userDto.getAddress()));
        

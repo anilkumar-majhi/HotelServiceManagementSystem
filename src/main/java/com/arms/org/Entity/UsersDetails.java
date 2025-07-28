@@ -1,6 +1,6 @@
 package com.arms.org.Entity;
 
-import java.time.LocalDateTime;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -12,7 +12,6 @@ import jakarta.persistence.Id;
 
 
 @Entity
-
 public class UsersDetails {
 	public Long getUserId() {
 		return userId;

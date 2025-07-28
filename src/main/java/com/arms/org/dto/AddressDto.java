@@ -1,5 +1,7 @@
 package com.arms.org.dto;
 
+
+
 public class AddressDto {
 	private String country;
     private String state;

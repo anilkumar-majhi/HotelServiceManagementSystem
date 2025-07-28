@@ -1,7 +1,5 @@
 package com.arms.org.dto;
 
-import com.arms.org.Entity.Address;
-
 public class UsersDto {
 	private Long userId;
     private String fName;
@@ -9,7 +7,22 @@ public class UsersDto {
     private String lName;
     private String eMail;
     private String mobileNo;
-    private Address address;
+    private String gender;
+    private String password;
+    
+    public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	private AddressDto address;
 	public Long getUserId() {
 		return userId;
 	}
@@ -46,11 +59,11 @@ public class UsersDto {
 	public void setMobileNo(String mobileNo) {
 		this.mobileNo = mobileNo;
 	}
-	public Address getAddress() {
+	public AddressDto getAddress() {
 		return address;
 	}
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAddress(AddressDto add) {
+		this.address = add;
 	}
     
     

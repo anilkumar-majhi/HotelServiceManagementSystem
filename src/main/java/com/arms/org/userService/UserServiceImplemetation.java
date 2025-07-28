@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.arms.org.Entity.UsersDetails;
+import com.arms.org.ExceptionHandler.UsersNotFoundException;
 import com.arms.org.Repository.UserRepository;
 import com.arms.org.dto.UsersDto;
 import com.arms.org.mapper.UsersDetailsMapper;
@@ -18,14 +19,11 @@ public class UserServiceImplemetation implements UserService {
 	@Autowired
 	 private UserRepository userRepository;
 	@Autowired
-	UsersDetailsMapper mapper;
+	private UsersDetailsMapper mapper;
 
 
 	@Override
-	public List<UsersDto> getAllDetails(UsersDto userDto) {
-		if(userDto==null) {
-			System.out.println("Users Not Avalabile");
-		}
+	public List<UsersDto> getAllDetails() {
 		
 		return userRepository.findAll()
 				.stream().map(mapper::toDto).collect(Collectors.toList());
@@ -56,9 +54,12 @@ public class UserServiceImplemetation implements UserService {
          existingUser.setmName(userDto.getmName());
          existingUser.setlName(userDto.getlName());
          existingUser.seteMail(userDto.geteMail());
+         existingUser.setGender(userDto.getGender());
          existingUser.setMobileNo(userDto.getMobileNo());
-         existingUser.setAddress(userDto.getAddress());
-         
+         existingUser.setPassword(userDto.getPassword());
+        
+         existingUser.setAddress(mapper.toAddressEntity(userDto.getAddress()));
+       
          UsersDetails userDetail=userRepository.save(existingUser);
          
          return mapper.toDto(userDetail);
@@ -66,19 +67,19 @@ public class UserServiceImplemetation implements UserService {
 	}
 
 	@Override
-	public Optional<UsersDto> getById(Long id) {
+	public  UsersDto getById(Long id) {
+		UsersDetails user=userRepository.findById(id).orElseThrow(()-> new UsersNotFoundException("User Not Found"+id));
 
-		return userRepository.findById(id).map(mapper::toDto);
+		return mapper.toDto(user);
 	}
 
 	@Override
 	public void deleteById(Long id) {
 
-		Optional<UsersDetails> existUser=userRepository.findById(id);
-		if(existUser.isPresent()) {
+		if(userRepository.existsById(id)) {
 			userRepository.deleteById(id);
 		}
-		throw new RuntimeException("User not found : " + id);
+		throw new RuntimeException("User not found  " + id);
 
 	}
 

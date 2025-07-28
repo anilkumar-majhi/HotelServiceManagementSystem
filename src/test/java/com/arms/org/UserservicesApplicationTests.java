@@ -1,14 +1,13 @@
 package com.arms.org;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.arms.org.Entity.Address;
 import com.arms.org.Entity.UsersDetails;
+import com.arms.org.Entity.Address;
 import com.arms.org.Repository.UserRepository;
 
 @SpringBootTest
@@ -19,34 +18,35 @@ class UserservicesApplicationTests {
 
     @Test
     public void testSaveUserDetails() {
-        // Create user
+        // Create entity
         UsersDetails user = new UsersDetails();
         user.setfName("Anil");
         user.setmName("Kumar");
         user.setlName("Majhi");
+        user.seteMail("anil@gmail.com");
         user.setMobileNo("7978901289");
-        // Do NOT manually set ID if it’s auto-generated
-        // user.setUserId(1L);
+        user.setGender("Male");
+        user.setPassword("secret123");
 
-        // Create address
-        Address add = new Address();
-        add.setCountry("India");
-        add.setState("Odisha");
-        add.setBlock("Baliapal");
-        add.setDistrict("Balasore");
-        add.setCity("Balasore");
-        add.setGp("Jambhirai");
-        add.setPincode("756024");
+        // Create and set embedded Address
+        Address address = new Address();
+        address.setCountry("India");
+        address.setState("Odisha");
+        address.setBlock("Baliapal");
+        address.setDistrict("Balasore");
+        address.setCity("Balasore");
+        address.setGp("Jambhirai");
+        address.setPincode("756024");
 
-        // Set address to user
-        user.setAddress(add);
+        user.setAddress(address);
 
-        // Save user
+        // Save to DB
         UsersDetails savedUser = userRepository.save(user);
 
         // Assertions
         assertNotNull(savedUser.getUserId(), "User ID should not be null after saving");
         assertEquals("Anil", savedUser.getfName());
         assertEquals("Odisha", savedUser.getAddress().getState());
+        assertEquals("Balasore", savedUser.getAddress().getCity());
     }
 }

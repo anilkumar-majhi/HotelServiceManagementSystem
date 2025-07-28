@@ -10,13 +10,8 @@ import com.arms.org.dto.UsersDto;
 @Mapper(componentModel = "spring")
 public interface UsersDetailsMapper {
 
-    // Entity to DTO mapping
-    UsersDto toDto(UsersDetails user);
-
-    // DTO to Entity mapping
+    UsersDto toDto(UsersDetails user); 
     UsersDetails toEntity(UsersDto userDTO);
-
-    // Manual mapping between Address ↔ AddressDto
     AddressDto toAddressDto(Address address);
     
     Address toAddressEntity(AddressDto dto);

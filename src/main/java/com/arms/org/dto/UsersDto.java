@@ -1,4 +1,4 @@
-// ✅ Correct DTO class
+
 package com.arms.org.dto;
 
 public class UsersDto {
@@ -10,8 +10,6 @@ public class UsersDto {
 	private String mobileNo;
 	private String gender;
 	private String password;
-
-	
 	private AddressDto address;
 
 	public Long getUserId() { return userId; }

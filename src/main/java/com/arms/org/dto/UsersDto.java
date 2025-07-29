@@ -11,7 +11,7 @@ public class UsersDto {
 	private String gender;
 	private String password;
 
-	// ✅ Use "address" instead of "addressDto"
+	
 	private AddressDto address;
 
 	public Long getUserId() { return userId; }
